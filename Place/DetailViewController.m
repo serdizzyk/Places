@@ -15,21 +15,20 @@
 
 @implementation DetailViewController
 
-- (void)dealloc
-{
-    [_detailItem release];
-    [_detailDescriptionLabel release];
+- (void)dealloc {
+    [_detailItems release];
     [_masterPopoverController release];
+    [_mapView release];
     [super dealloc];
 }
 
 #pragma mark - Managing the detail item
 
-- (void)setDetailItem:(id)newDetailItem
+- (void)setDetailItem:(NSArray*)newDetailItem
 {
-    if (_detailItem != newDetailItem) {
-        [_detailItem release];
-        _detailItem = [newDetailItem retain];
+    if (_detailItems != newDetailItem) {
+        [_detailItems release];
+        _detailItems = [newDetailItem retain];
 
         // Update the view.
         [self configureView];
@@ -44,8 +43,8 @@
 {
     // Update the user interface for the detail item.
 
-    if (self.detailItem) {
-        self.detailDescriptionLabel.text = [self.detailItem description];
+    if (self.detailItems) {
+        //self.detailDescriptionLabel.text = [self.detailItem description];
     }
 }
 
@@ -66,7 +65,7 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        self.title = NSLocalizedString(@"Detail", @"Detail");
+        self.title = LOC_MAP;
     }
     return self;
 }
@@ -75,7 +74,7 @@
 
 - (void)splitViewController:(UISplitViewController *)splitController willHideViewController:(UIViewController *)viewController withBarButtonItem:(UIBarButtonItem *)barButtonItem forPopoverController:(UIPopoverController *)popoverController
 {
-    barButtonItem.title = NSLocalizedString(@"Master", @"Master");
+    barButtonItem.title = LOC_MENU;
     [self.navigationItem setLeftBarButtonItem:barButtonItem animated:YES];
     self.masterPopoverController = popoverController;
 }
@@ -85,6 +84,33 @@
     // Called when the view is shown again in the split view, invalidating the button and popover controller.
     [self.navigationItem setLeftBarButtonItem:nil animated:YES];
     self.masterPopoverController = nil;
+}
+
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)orientation {
+    return ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad || orientation == UIDeviceOrientationPortrait);
+}
+
+- (void)viewDidUnload {
+    self.mapView = nil;
+    [super viewDidUnload];
+}
+
+- (void)clearMap {
+    id userLocation = [self.mapView userLocation];
+    NSMutableArray *pins = [[NSMutableArray alloc] initWithArray:[self.mapView annotations]];
+    
+    if ( userLocation != nil ) {
+        [pins removeObject:userLocation]; // avoid removing user location off the map
+    }
+    
+    [self.mapView removeAnnotations:pins];
+    [pins release];
+    
+    for (id<MKOverlay> overlayToRemove in self.mapView.overlays) {
+        [self.mapView removeOverlay:overlayToRemove];
+    }
+    
+    
 }
 
 @end

@@ -7,11 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <MapKit/MapKit.h>
 
 @interface DetailViewController : UIViewController <UISplitViewControllerDelegate>
 
-@property (strong, nonatomic) id detailItem;
+@property (retain, nonatomic) NSArray *detailItems;
+@property (retain, nonatomic) IBOutlet MKMapView *mapView;
 
-@property (strong, nonatomic) IBOutlet UILabel *detailDescriptionLabel;
+- (void)clearMap;
 
 @end
