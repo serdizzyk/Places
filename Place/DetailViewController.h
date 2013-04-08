@@ -10,7 +10,7 @@
 #import <MapKit/MapKit.h>
 
 @interface DetailViewController : UIViewController <UISplitViewControllerDelegate>
-
+//i was here!!!
 @property (retain, nonatomic) NSArray *detailItems;
 @property (retain, nonatomic) IBOutlet MKMapView *mapView;
 
