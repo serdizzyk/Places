@@ -176,7 +176,6 @@
 			isa = PBXGroup;
 			children = (
 				2506353E1704821200DBA7BA /* Place-Info.plist */,
-				253CBFB51712CDBE00C3DA3B /* Places.db */,
 				2506353F1704821200DBA7BA /* InfoPlist.strings */,
 				250635421704821200DBA7BA /* main.m */,
 				250635441704821200DBA7BA /* Place-Prefix.pch */,
@@ -190,6 +189,7 @@
 		250635651704889200DBA7BA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				253CBFB51712CDBE00C3DA3B /* Places.db */,
 				25DA64291709BB7300F04710 /* Images */,
 				250635541704821300DBA7BA /* MasterViewController_iPhone.xib */,
 				250635571704821300DBA7BA /* MasterViewController_iPad.xib */,
