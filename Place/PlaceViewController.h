@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "PlaceEntity.h"
-
+//кукуцкцкцукцук
 @interface PlaceViewController : UIViewController<UITableViewDelegate, UITableViewDataSource>
 
 @property (retain, nonatomic) PlaceEntity *place;
